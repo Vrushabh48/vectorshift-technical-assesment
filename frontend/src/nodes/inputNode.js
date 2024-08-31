@@ -1,5 +1,3 @@
-// inputNode.js
-
 import { useState } from 'react';
 import { Handle, Position } from 'reactflow';
 
@@ -16,22 +14,29 @@ export const InputNode = ({ id, data }) => {
   };
 
   return (
-    <div style={{width: 200, height: 80, border: '1px solid black'}}>
-      <div>
-        <span>Input</span>
+    <div className="w-full max-w-xs p-6 border border-gray-300 rounded-lg shadow-sm bg-white">
+      <div className="mb-4">
+        <span className="text-xl font-bold text-gray-800">Input</span>
       </div>
-      <div>
-        <label>
-          Name:
-          <input 
-            type="text" 
-            value={currName} 
-            onChange={handleNameChange} 
+      <div className="space-y-4">
+        <label className="block">
+          <span className="text-sm font-medium text-gray-700">Name:</span>
+          <input
+            type="text"
+            value={currName}
+            onChange={handleNameChange}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+            aria-label="Input name"
           />
         </label>
-        <label>
-          Type:
-          <select value={inputType} onChange={handleTypeChange}>
+        <label className="block">
+          <span className="text-sm font-medium text-gray-700">Type:</span>
+          <select
+            value={inputType}
+            onChange={handleTypeChange}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500"
+            aria-label="Input type"
+          >
             <option value="Text">Text</option>
             <option value="File">File</option>
           </select>
@@ -44,4 +49,4 @@ export const InputNode = ({ id, data }) => {
       />
     </div>
   );
-}
+};
