@@ -48,7 +48,7 @@ export const PipelineUI = () => {
     let nodeData = { id: nodeID, nodeType: type };
     return nodeData;
   }
-
+//new part
   useEffect(() => {
     console.log('Number of nodes:', nodes.length);
     console.log('Number of edges:', edges.length);
@@ -58,17 +58,17 @@ export const PipelineUI = () => {
   const onDrop = useCallback(
     (event) => {
       event.preventDefault();
-  
+
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
       if (event?.dataTransfer?.getData('application/reactflow')) {
         const appData = JSON.parse(event.dataTransfer.getData('application/reactflow'));
         const type = appData?.nodeType;
-  
+
         // check if the dropped element is valid
         if (typeof type === 'undefined' || !type) {
           return;
         }
-  
+
         const position = reactFlowInstance.project({
           x: event.clientX - reactFlowBounds.left,
           y: event.clientY - reactFlowBounds.top,
@@ -81,7 +81,7 @@ export const PipelineUI = () => {
           position,
           data: getInitNodeData(nodeID, type),
         };
-  
+
         addNode(newNode);
       }
     },
@@ -96,47 +96,47 @@ export const PipelineUI = () => {
   return (
     <>
       <div ref={reactFlowWrapper} className="w-screen h-[70vh] relative">
-  <ReactFlow
-    nodes={nodes}
-    edges={edges}
-    onNodesChange={onNodesChange}
-    onEdgesChange={onEdgesChange}
-    onConnect={onConnect}
-    onDrop={onDrop}
-    onDragOver={onDragOver}
-    onInit={setReactFlowInstance}
-    nodeTypes={nodeTypes}
-    proOptions={proOptions}
-    snapGrid={[gridSize, gridSize]}
-    connectionLineType="smoothstep"
-  >
-    <Background color="#aaa" gap={gridSize} />
-    <Controls />
-    <MiniMap />
-  </ReactFlow>
+        <ReactFlow
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          onDrop={onDrop}
+          onDragOver={onDragOver}
+          onInit={setReactFlowInstance}
+          nodeTypes={nodeTypes}
+          proOptions={proOptions}
+          snapGrid={[gridSize, gridSize]}
+          connectionLineType="smoothstep"
+        >
+          <Background color="#aaa" gap={gridSize} />
+          <Controls />
+          <MiniMap />
+        </ReactFlow>
 
 
 
-  <div className="absolute bottom-5 right-5 p-5 bg-white shadow-lg rounded-lg border border-gray-200">
-    <h4 className="text-lg font-semibold mb-4">Statistics</h4>
-    <table className="w-full text-left">
-      <tbody>
-        <tr>
-          <td className="py-2 px-3 font-medium text-gray-700 border-b">Node Count</td>
-          <td className="py-2 px-3 text-gray-900 border-b">{nodeCount}</td>
-        </tr>
-        <tr>
-          <td className="py-2 px-3 font-medium text-gray-700 border-b">Edge Count</td>
-          <td className="py-2 px-3 text-gray-900 border-b">{edgeCount}</td>
-        </tr>
-        <tr>
-          <td className="py-2 px-3 font-medium text-gray-700">Is DAG</td>
-          <td className="py-2 px-3 text-gray-900">{isDAG ? 'True' : 'False'}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+        <div className="absolute bottom-5 right-5 p-5 bg-white shadow-lg rounded-lg border border-gray-200">
+          <h4 className="text-lg font-semibold mb-4">Statistics</h4>
+          <table className="w-full text-left">
+            <tbody>
+              <tr>
+                <td className="py-2 px-3 font-medium text-gray-700 border-b">Node Count</td>
+                <td className="py-2 px-3 text-gray-900 border-b">{nodeCount}</td>
+              </tr>
+              <tr>
+                <td className="py-2 px-3 font-medium text-gray-700 border-b">Edge Count</td>
+                <td className="py-2 px-3 text-gray-900 border-b">{edgeCount}</td>
+              </tr>
+              <tr>
+                <td className="py-2 px-3 font-medium text-gray-700">Is DAG</td>
+                <td className="py-2 px-3 text-gray-900">{isDAG ? 'True' : 'False'}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
 
     </>
   )

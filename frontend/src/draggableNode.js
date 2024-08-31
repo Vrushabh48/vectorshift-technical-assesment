@@ -1,40 +1,40 @@
-// draggableNode.js
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesome for icons
 
-export const DraggableNode = ({ type, label }) => {
-    const onDragStart = (event, nodeType) => {
-      const appData = { nodeType }
-      event.target.style.cursor = 'grabbing';
-      event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
-      event.dataTransfer.effectAllowed = 'move';
-    };
-  
-    return (
-      <div
-  className={type}
-  onDragStart={(event) => onDragStart(event, type)}
-  onDragEnd={(event) => (event.target.style.cursor = 'grab')}
-  style={{ 
-    cursor: 'grab', 
-    minWidth: '80px', 
-    height: '60px',
-    display: 'flex', 
-    alignItems: 'center', 
-    borderRadius: '8px',
-    backgroundColor: '#4F46E5',  // Soft blue/purple tone
-    justifyContent: 'center', 
-    flexDirection: 'column',
-    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',  // Soft shadow for depth
-    transition: 'background-color 0.3s ease, transform 0.2s ease', // Smooth transitions
-  }} 
-  draggable
-  onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#6366F1'}  // Lighter on hover
-  onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#4F46E5'}  // Revert on leave
-  onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.95)'}  // Shrink on click
-  onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}  // Reset scale on release
->
-  <span style={{ color: '#fff', fontSize: '14px', fontWeight: '600' }}>{label}</span>
-</div>
-
-    );
+export const DraggableNode = ({ type, label, icon }) => {
+  const onDragStart = (event, nodeType) => {
+    const appData = { nodeType };
+    event.target.style.cursor = 'grabbing';
+    event.dataTransfer.setData('application/reactflow', JSON.stringify(appData));
+    event.dataTransfer.effectAllowed = 'move';
   };
-  
+
+  return (
+    <div
+      className="draggable-node"
+      onDragStart={(event) => onDragStart(event, type)}
+      onDragEnd={(event) => (event.target.style.cursor = 'grab')}
+      style={{
+        cursor: 'grab',
+        width: '80px',
+        height: '80px',
+        display: 'flex',
+        flexDirection: 'column', // Arrange icon and label vertically
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '10px',
+        backgroundColor: '#FFFFFF', // White background
+        border: '1px solid #E0E0E0', // Light border
+        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)', // Subtle shadow for depth
+        transition: 'background-color 0.3s ease, transform 0.2s ease', // Smooth transitions
+      }}
+      draggable
+      onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#F3F4F6'}  // Light gray on hover
+      onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}  // Revert to white on leave
+      onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.95)'}  // Shrink on click
+      onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}  // Reset scale on release
+    >
+      <FontAwesomeIcon icon={icon} style={{ fontSize: '24px', color: '#6B7280' }} /> 
+      <span style={{ color: '#6B7280', fontSize: '12px', marginTop: '8px' }}>{label}</span>
+    </div>
+  );
+};

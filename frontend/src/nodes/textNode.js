@@ -69,35 +69,35 @@ export const TextNode = ({ id, data }) => {
 
   return (
     <BaseNode
-  id={id}
-  handles={[
-    ...handles,
-    { type: 'source', position: 'Right', id: 'output' },
-  ]}
-  label="Text Node"
-  content={
-    <textarea 
-      ref={textareaRef}
-      value={currText} 
-      onChange={(e) => {
-        handleTextChange(e);
-        // Dynamically adjust the height based on the content
-        textareaRef.current.style.height = 'auto'; // Reset height
-        textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height based on scrollHeight
-      }}
-      style={{ 
-        width: dimensions.width - 20, 
-        height: textareaRef.current?.scrollHeight || 80, 
-        overflow: 'hidden' 
+      id={id}
+      handles={[
+        ...handles,
+        { type: 'source', position: 'Right', id: 'output' },
+      ]}
+      label="Text Node"
+      content={
+        <textarea
+          ref={textareaRef}
+          value={currText}
+          onChange={(e) => {
+            handleTextChange(e);
+            // Dynamically adjust the height based on the content
+            textareaRef.current.style.height = 'auto'; // Reset height
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Set height based on scrollHeight
+          }}
+          style={{
+            width: dimensions.width - 20,
+            height: textareaRef.current?.scrollHeight || 80,
+            overflow: 'hidden'
+          }}
+        />
+      }
+      style={{
+        width: dimensions.width,
+        height: Math.max(textareaRef.current?.scrollHeight + 40 || 120, dimensions.height),
+        border: '1px solid black'
       }}
     />
-  }
-  style={{ 
-    width: dimensions.width, 
-    height: Math.max(textareaRef.current?.scrollHeight + 40 || 120, dimensions.height), 
-    border: '1px solid black' 
-  }}
-/>
 
   );
 };
